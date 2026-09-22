@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <!-- Dark slate background to match theme -->
+    <rect width="512" height="512" rx="112" fill="#0f172a"/>
+    
+    <!-- Calendar Body Outline -->
+    <rect x="128" y="144" width="256" height="256" rx="32" fill="none" stroke="#8b5cf6" stroke-width="32"/>
+    
+    <!-- Calendar Top Bar -->
+    <line x1="128" y1="216" x2="384" y2="216" stroke="#8b5cf6" stroke-width="32"/>
+    
+    <!-- Calendar Binders/Rings -->
+    <line x1="176" y1="104" x2="176" y2="152" stroke="#3b82f6" stroke-width="32" stroke-linecap="round"/>
+    <line x1="336" y1="104" x2="336" y2="152" stroke="#3b82f6" stroke-width="32" stroke-linecap="round"/>
+    
+    <!-- Current Day Highlight Dot -->
+    <circle cx="200" cy="288" r="24" fill="#3b82f6"/>
+</svg>
