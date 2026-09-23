@@ -168,13 +168,20 @@ body {
     flex-shrink: 0;
 }
 
+.header-center-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+}
+
 .time-remaining {
     font-size: 0.7rem;
     color: var(--text-muted);
     white-space: nowrap;
     flex-shrink: 0;
     text-align: right;
-    display: block;
 }
 
 .progress-bar-container {
@@ -550,7 +557,8 @@ body {
     border-radius: 16px;
     flex: 1;
     min-height: 0;
-    /* Fill remaining tab space */
+    -webkit-overflow-scrolling: touch;
+    will-change: transform;
 }
 
 .calendar-wrapper,
@@ -729,42 +737,21 @@ body {
     height: 10px;
     border-radius: 50%;
     background-color: #ef4444;
-    box-shadow: 0 0 10px #ef4444, 0 0 20px #ef4444;
-    animation: pulse-red 2s infinite;
+    /* Removed heavy shadows/animations for mobile scrolling performance */
 }
 
 @keyframes pulse-red {
-    0% {
-        transform: scale(0.95);
-        opacity: 0.8;
-    }
-
-    50% {
-        transform: scale(1.4);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(0.95);
-        opacity: 0.8;
-    }
+    /* Kept empty but available if needed later */
 }
 
 .cal-active-glow {
     border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1);
     z-index: 15;
-    animation: block-pulse 3s infinite alternate;
+    /* Removed heavy inner shadows and filter brightness animations for performance */
 }
 
 @keyframes block-pulse {
-    0% {
-        filter: brightness(1);
-    }
-
-    100% {
-        filter: brightness(1.3);
-    }
+    /* Removed for performance */
 }
 
 .cal-past-dim {
@@ -835,7 +822,7 @@ body {
     }
 
     .header-task-time {
-        display: none;
+        font-size: 0.65rem;
     }
 
     .time-remaining {
