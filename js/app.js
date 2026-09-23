@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderWeekGrid() {
-        calendarHeader.innerHTML = '<div class="cal-header-day" style="border-left:none; font-size: 0.85rem; padding: 1rem 0; color: var(--text-muted);">Time</div>'; // Corner
+        calendarHeader.innerHTML = '<div class="cal-header-day" style="border-left:none; padding: 0.35rem 0; color: var(--text-muted);">Time</div>'; // Corner
         timeScale.innerHTML = '';
         weekGrid.innerHTML = '';
         

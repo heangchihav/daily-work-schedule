@@ -27,29 +27,23 @@
     <div class="app-container">
         <!-- Unified Header & Current Task -->
         <header class="glass-panel unified-header">
-            <div class="header-top">
-                <div class="date-display">
-                    <h2 id="current-day">Loading Day...</h2>
-                    <p id="current-date">Loading Date...</p>
-                </div>
-                <div class="time-display">
-                    <h1 id="current-time">00:00</h1>
-                </div>
+            <div class="header-left">
+                <span id="current-day" class="header-day">Loading...</span>
+                <span id="current-date" class="header-date">Loading...</span>
             </div>
-            
-            <div class="hero-content compact-hero">
-                <div class="hero-task-row">
-                    <span class="status-badge pulse"><i class="fa-solid fa-circle"></i> NOW PLAYING</span>
-                    <span id="current-task-type" class="type-badge">...</span>
-                </div>
-                <h2 id="current-task-title">Checking Schedule...</h2>
-                <div class="task-meta">
-                    <span id="current-task-time"><i class="fa-regular fa-clock"></i> --:-- to --:--</span>
-                    <span class="time-remaining" id="time-remaining">-- minutes remaining</span>
+            <div class="header-center">
+                <div class="header-center-row">
+                    <span id="current-task-title" class="header-task-title">Checking Schedule...</span>
+                    <span id="current-task-time" class="header-task-time"><i class="fa-regular fa-clock"></i> --:-- – --:--</span>
                 </div>
                 <div class="progress-bar-container">
                     <div class="progress-bar" id="task-progress"></div>
                 </div>
+                <span class="time-remaining" id="time-remaining"></span>
+            </div>
+            <div class="header-right">
+                <span id="current-task-type" class="type-badge">...</span>
+                <h1 id="current-time">00:00</h1>
             </div>
         </header>
 
