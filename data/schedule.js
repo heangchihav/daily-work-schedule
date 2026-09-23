@@ -23,15 +23,13 @@ const Days = {
 // REUSABLE BLOCKS (Change once, updates everywhere)
 // ==========================================
 const CommonBlocks = {
-    windDown: { start: "00:00", end: "01:00", title: "Wind Down & Relax", type: TaskType.ROUTINE },
-    sleep: { start: "01:00", end: "08:00", title: "Sleep", type: TaskType.BREAK },
-    breakfast: { start: "08:00", end: "09:00", title: "Wake Up & High Protein Breakfast", type: TaskType.ROUTINE },
-    gymSession: { start: "09:00", end: "10:30", title: "Workout / Gym Session", type: TaskType.ROUTINE },
-    postWorkout: { start: "10:30", end: "11:00", title: "Workout + Protein", type: TaskType.ROUTINE },
-    openRoutine: { start: "11:00", end: "13:00", title: "Open Routine (Do Floating Tasks)", type: TaskType.ROUTINE },
-    lunch: { start: "13:00", end: "14:00", title: "Lunch", type: TaskType.BREAK },
-    study: { start: "14:00", end: "16:00", title: "Personal Projects / Study", type: TaskType.WORK },
-    deepWork: { start: "17:00", end: "24:00", title: "Deep Work Block", type: TaskType.WORK }
+    windDown: { start: "00:00", end: "01:00", title: "Free Time", type: TaskType.FREE_TIME },
+    sleep: { start: "01:00", end: "06:30", title: "Sleep", type: TaskType.BREAK },
+    morningWork: { start: "07:00", end: "11:30", title: "Day Shift Work", type: TaskType.WORK },
+    workout: { start: "11:30", end: "12:00", title: "Workout", type: TaskType.ROUTINE },
+    lunch: { start: "12:00", end: "13:00", title: "Lunch + Drink Protein", type: TaskType.BREAK },
+    dayShiftWork: { start: "14:00", end: "17:30", title: "Day Shift Work", type: TaskType.WORK },
+    nightShiftWork: { start: "17:30", end: "24:00", title: "Night Shift Work", type: TaskType.WORK }
 };
 
 // ==========================================
@@ -41,68 +39,56 @@ const rawFixedTasks = {
     [Days.MONDAY]: [
         CommonBlocks.windDown,
         CommonBlocks.sleep,
-        CommonBlocks.breakfast,
-        CommonBlocks.gymSession,
-        CommonBlocks.postWorkout,
-        CommonBlocks.openRoutine,
+        CommonBlocks.morningWork,
+        CommonBlocks.workout,
         CommonBlocks.lunch,
-        CommonBlocks.study,
-        CommonBlocks.deepWork
+        CommonBlocks.dayShiftWork,
+        CommonBlocks.nightShiftWork
     ],
     [Days.TUESDAY]: [
         CommonBlocks.windDown,
         CommonBlocks.sleep,
-        CommonBlocks.breakfast,
-        CommonBlocks.gymSession,
-        CommonBlocks.postWorkout,
-        CommonBlocks.openRoutine,
+        CommonBlocks.morningWork,
+        CommonBlocks.workout,
         CommonBlocks.lunch,
-        CommonBlocks.study,
-        CommonBlocks.deepWork
+        CommonBlocks.dayShiftWork,
+        CommonBlocks.nightShiftWork
     ],
     [Days.WEDNESDAY]: [
         CommonBlocks.windDown,
         CommonBlocks.sleep,
-        CommonBlocks.breakfast,
-        CommonBlocks.gymSession,
-        CommonBlocks.postWorkout,
-        CommonBlocks.openRoutine,
+        CommonBlocks.morningWork,
+        CommonBlocks.workout,
         CommonBlocks.lunch,
-        CommonBlocks.study,
-        CommonBlocks.deepWork
+        CommonBlocks.dayShiftWork,
+        CommonBlocks.nightShiftWork
     ],
     [Days.THURSDAY]: [
         CommonBlocks.windDown,
         CommonBlocks.sleep,
-        CommonBlocks.breakfast,
-        { start: "09:00", end: "10:30", title: "Workout / Active Recovery", type: TaskType.ROUTINE },
-        CommonBlocks.postWorkout,
-        CommonBlocks.openRoutine,
+        CommonBlocks.morningWork,
+        CommonBlocks.workout,
         CommonBlocks.lunch,
-        CommonBlocks.study,
-        CommonBlocks.deepWork
+        CommonBlocks.dayShiftWork,
+        CommonBlocks.nightShiftWork
     ],
     [Days.FRIDAY]: [
         CommonBlocks.windDown,
         CommonBlocks.sleep,
-        CommonBlocks.breakfast,
-        CommonBlocks.gymSession,
-        CommonBlocks.postWorkout,
-        CommonBlocks.openRoutine,
+        CommonBlocks.morningWork,
+        CommonBlocks.workout,
         CommonBlocks.lunch,
-        CommonBlocks.study,
-        CommonBlocks.deepWork
+        CommonBlocks.dayShiftWork,
+        CommonBlocks.nightShiftWork
     ],
     [Days.SATURDAY]: [
         CommonBlocks.windDown,
         CommonBlocks.sleep,
-        CommonBlocks.breakfast,
-        { start: "09:00", end: "10:30", title: "Workout / Outdoor Activity", type: TaskType.ROUTINE },
-        CommonBlocks.postWorkout,
-        { start: "11:00", end: "13:00", title: "Free Time / Hobbies", type: TaskType.ROUTINE },
+        CommonBlocks.morningWork,
+        CommonBlocks.workout,
         CommonBlocks.lunch,
-        { start: "14:00", end: "16:00", title: "Socialize / Relax", type: TaskType.BREAK },
-        { start: "17:00", end: "24:00", title: "Deep Work Block (Weekend Catchup)", type: TaskType.WORK }
+        CommonBlocks.dayShiftWork,
+        CommonBlocks.nightShiftWork
     ],
     [Days.SUNDAY]: [
         // Sunday is fully free by default
@@ -113,12 +99,32 @@ const rawFixedTasks = {
 // FLOATING TASKS
 // ==========================================
 let floatingTasks = [
-    { title: "Submit expense report", targetDay: Days.TUESDAY, targetTime: "15:00", completed: false },
-    { title: "Update resume", targetDay: Days.ANY, targetTime: "", completed: false },
-    { title: "Read chapter 4 of design book", targetDay: Days.THURSDAY, targetTime: "20:00", completed: false },
-    { title: "Reply to client feedback email", targetDay: Days.TUESDAY, targetTime: "12:00", completed: false },
-    { title: "Buy protein powder", targetDay: Days.ANY, targetTime: "", completed: false },
-    { title: "Research new gym routines", targetDay: Days.SUNDAY, targetTime: "14:00", completed: false }
+    // "Ej" - Mon, Wed, Fri, Sat
+    { title: "Ej", targetDay: Days.MONDAY, targetTime: "", completed: false },
+    { title: "Ej", targetDay: Days.WEDNESDAY, targetTime: "", completed: false },
+    { title: "Ej", targetDay: Days.FRIDAY, targetTime: "", completed: false },
+    { title: "Ej", targetDay: Days.SATURDAY, targetTime: "", completed: false },
+    
+    // Check email - Everyday
+    { title: "Check email", targetDay: Days.MONDAY, targetTime: "", completed: false },
+    { title: "Check email", targetDay: Days.TUESDAY, targetTime: "", completed: false },
+    { title: "Check email", targetDay: Days.WEDNESDAY, targetTime: "", completed: false },
+    { title: "Check email", targetDay: Days.THURSDAY, targetTime: "", completed: false },
+    { title: "Check email", targetDay: Days.FRIDAY, targetTime: "", completed: false },
+    { title: "Check email", targetDay: Days.SATURDAY, targetTime: "", completed: false },
+    { title: "Check email", targetDay: Days.SUNDAY, targetTime: "", completed: false },
+
+    // Sunday chores
+    { title: "Clean toilet", targetDay: Days.SUNDAY, targetTime: "", completed: false },
+    { title: "Do laundry", targetDay: Days.SUNDAY, targetTime: "", completed: false },
+
+    // Manage KS (Mon-Sat, 5 PM - 12 AM)
+    { title: "Manage KS", targetDay: Days.MONDAY, targetTime: "17:00 - 00:00", completed: false },
+    { title: "Manage KS", targetDay: Days.TUESDAY, targetTime: "17:00 - 00:00", completed: false },
+    { title: "Manage KS", targetDay: Days.WEDNESDAY, targetTime: "17:00 - 00:00", completed: false },
+    { title: "Manage KS", targetDay: Days.THURSDAY, targetTime: "17:00 - 00:00", completed: false },
+    { title: "Manage KS", targetDay: Days.FRIDAY, targetTime: "17:00 - 00:00", completed: false },
+    { title: "Manage KS", targetDay: Days.SATURDAY, targetTime: "17:00 - 00:00", completed: false }
 ];
 
 // ==========================================

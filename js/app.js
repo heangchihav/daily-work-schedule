@@ -147,12 +147,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const remainingMins = endMins - currentTimeMinutes;
             timeRemaining.textContent = `${remainingMins} min remaining`;
         } else {
-            taskTitle.textContent = "Free Time / Open Routine";
-            taskTime.innerHTML = `<i class="fa-solid fa-mug-hot"></i> No scheduled block`;
+            let freeStartMins = 0;
+            let freeEndMins = 24 * 60;
+            
+            for (const task of currentTasks) {
+                const s = parseTime(task.start);
+                const e = parseTime(task.end);
+                if (e <= currentTimeMinutes) {
+                    freeStartMins = Math.max(freeStartMins, e);
+                }
+                if (s > currentTimeMinutes) {
+                    freeEndMins = Math.min(freeEndMins, s);
+                }
+            }
+            
+            const formatTime = (mins) => {
+                const h = Math.floor(mins / 60).toString().padStart(2, '0');
+                const m = (mins % 60).toString().padStart(2, '0');
+                return `${h}:${m}`;
+            };
+            
+            taskTitle.textContent = "Free Time";
+            taskTime.innerHTML = `<i class="fa-regular fa-clock"></i> ${formatTime(freeStartMins)} - ${formatTime(freeEndMins)}`;
             taskType.textContent = "free";
             taskType.className = `type-badge`;
-            progressBar.style.width = `0%`;
-            timeRemaining.textContent = "";
+            
+            const totalDuration = freeEndMins - freeStartMins;
+            const elapsed = currentTimeMinutes - freeStartMins;
+            const progressPercent = totalDuration > 0 ? (elapsed / totalDuration) * 100 : 0;
+            
+            progressBar.style.width = `${progressPercent}%`;
+            
+            const remainingMins = freeEndMins - currentTimeMinutes;
+            timeRemaining.textContent = `${remainingMins} min remaining`;
         }
         
     }

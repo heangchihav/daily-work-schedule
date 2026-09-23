@@ -458,6 +458,11 @@ body {
     margin-bottom: 0.5rem;
 }
 
+#floating-tab {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 /* Floating Tasks */
 .floating-header {
     margin-bottom: 2rem;
@@ -747,7 +752,16 @@ body {
 .cal-active-glow {
     border: 1px solid rgba(255, 255, 255, 0.8);
     z-index: 15;
-    /* Removed heavy inner shadows and filter brightness animations for performance */
+    animation: gentle-shine 2s infinite alternate ease-in-out;
+}
+
+@keyframes gentle-shine {
+    0% {
+        box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.15), 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    100% {
+        box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.4);
+    }
 }
 
 @keyframes block-pulse {
@@ -816,6 +830,36 @@ body {
         overflow: hidden;
         min-width: 0;
     }
+
+    /* Floating Tasks Mobile Styles */
+    .floating-header {
+        margin-bottom: 1rem;
+    }
+    
+    .floating-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .floating-header p {
+        font-size: 0.8rem;
+        margin-top: 0.2rem;
+    }
+
+    .floating-list {
+        grid-template-columns: 1fr; /* Force 1 column on small screens */
+        gap: 0.75rem;
+    }
+
+    .floating-card {
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        gap: 0.5rem;
+    }
+
+    .floating-card-header h4 {
+        font-size: 0.95rem;
+    }
+
 
     .header-task-title {
         font-size: 0.8rem;
