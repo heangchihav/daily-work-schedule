@@ -132,8 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeTask) {
             taskTitle.textContent = activeTask.title;
             taskTime.innerHTML = `<i class="fa-regular fa-clock"></i> ${activeTask.start} - ${activeTask.end}`;
+            const colorClass = getTaskColorClass(activeTask);
             taskType.textContent = activeTask.type;
-            taskType.className = `type-badge ${activeTask.type}`;
+            taskType.className = `type-badge ${activeTask.type} ${colorClass}`.trim();
             
             // Calculate progress
             const startMins = parseTime(activeTask.start);
@@ -189,6 +190,21 @@ document.addEventListener('DOMContentLoaded', () => {
         return h * 60 + m;
     }
 
+    function getTaskColorClass(task) {
+        if (!task) return '';
+        if (task.colorClass) return task.colorClass;
+        const title = (task.title || '').toLowerCase();
+        if (title.includes('sleep')) return 'task-sleep';
+        if (title.includes('nis')) return 'task-nis';
+        if (title.includes('vet')) return 'task-vet';
+        if (title.includes('gym') || title.includes('workout') || title.includes('ej')) return 'task-gym';
+        if (title.includes('lunch') || title.includes('protein') || title.includes('meal')) return 'task-lunch';
+        if (title.includes('email')) return 'task-email';
+        if (title.includes('clean') || title.includes('laundry') || title.includes('chore')) return 'task-chore';
+        if (title.includes('free')) return 'task-free';
+        return '';
+    }
+
     // --- Rendering Logic ---
 
 
@@ -211,7 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tasks.forEach((task, index) => {
             const card = document.createElement('div');
-            card.className = `floating-card ${task.completed ? 'completed' : ''}`;
+            const colorClass = getTaskColorClass(task);
+            card.className = `floating-card ${colorClass} ${task.completed ? 'completed' : ''}`.trim();
             
             let timeStr = task.targetTime ? ` at ${task.targetTime}` : '';
             let targetText = `${task.targetDay}${timeStr}`;
@@ -310,15 +327,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const topPx = (startMins / 60) * 50;
         const durationPx = ((endMins - startMins) / 60) * 50;
         
+        const colorClass = getTaskColorClass(task);
         const block = document.createElement('div');
-        block.className = `cal-task-block ${task.type}`;
+        block.className = `cal-task-block ${task.type || 'free'} ${colorClass}`.trim();
         block.style.top = `${topPx}px`;
         block.style.height = `${durationPx}px`;
         block.dataset.day = day;
         block.dataset.start = startMins;
         block.dataset.end = endMins;
         
-        block.innerHTML = `<h5>${task.title}</h5>`;
+        // Show time label if block height is large enough (>= 45 mins)
+        const durationMins = endMins - startMins;
+        const timeHtml = (durationMins >= 45 && task.start && task.end)
+            ? `<span class="cal-task-time">${task.start} – ${task.end}</span>`
+            : '';
+            
+        block.innerHTML = `<h5>${task.title}</h5>${timeHtml}`;
         
         container.appendChild(block);
     }

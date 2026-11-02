@@ -1,39 +1,40 @@
 :root {
-    /* Color Palette - Premium Dark Theme with Vibrant Accents */
-    --bg-base: #0f172a;
-    /* Slate 900 */
-    --bg-surface: rgba(30, 41, 59, 0.7);
-    /* Slate 800 with opacity */
-    --bg-surface-hover: rgba(51, 65, 85, 0.8);
-
-    --text-primary: #f8fafc;
+    /* Color Palette - Premium Light Theme with Harmonious Accents */
+    --bg-base: #f8fafc;
     /* Slate 50 */
-    --text-secondary: #94a3b8;
+    --bg-surface: rgba(255, 255, 255, 0.85);
+    /* Translucent crisp white */
+    --bg-surface-hover: rgba(255, 255, 255, 0.95);
+    --bg-surface-solid: #ffffff;
+
+    --text-primary: #0f172a;
+    /* Slate 900 */
+    --text-secondary: #475569;
+    /* Slate 600 */
+    --text-muted: #94a3b8;
     /* Slate 400 */
-    --text-muted: #64748b;
-    /* Slate 500 */
 
-    --accent-primary: #8b5cf6;
-    /* Violet 500 */
-    --accent-secondary: #ec4899;
-    /* Pink 500 */
-    --accent-tertiary: #3b82f6;
-    /* Blue 500 */
+    --accent-primary: #7c3aed;
+    /* Violet 600 */
+    --accent-secondary: #db2777;
+    /* Pink 600 */
+    --accent-tertiary: #2563eb;
+    /* Blue 600 */
 
-    --success: #10b981;
-    /* Emerald 500 */
-    --warning: #f59e0b;
-    /* Amber 500 */
+    --success: #059669;
+    /* Emerald 600 */
+    --warning: #d97706;
+    /* Amber 600 */
 
     /* Type Colors */
-    --type-work: #3b82f6;
-    --type-routine: #8b5cf6;
-    --type-meeting: #ec4899;
-    --type-break: #10b981;
+    --type-work: #2563eb;
+    --type-routine: #7c3aed;
+    --type-meeting: #db2777;
+    --type-break: #059669;
 
-    /* Glassmorphism */
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    /* Glassmorphism & Borders */
+    --glass-border: rgba(226, 232, 240, 0.9);
+    --glass-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
     --glass-blur: blur(16px);
 
     /* Animations */
@@ -55,7 +56,10 @@ html {
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-base);
-    background-image: radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+    background-image: 
+        radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.08) 0%, transparent 45%), 
+        radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(241, 245, 249, 0.6) 0%, transparent 100%);
     color: var(--text-primary);
     height: 100%;
     overflow: hidden;
@@ -63,12 +67,10 @@ body {
     padding: 0;
 }
 
-/* Background Blobs Removed for Performance - Static Gradient Applied to Body */
-
 /* App Container */
 .app-container {
     width: 100%;
-    height: 100%; /* Fixes mobile browser bottom cutoff (address bar bug) */
+    height: 100%; /* Fixes mobile browser bottom cutoff */
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -83,6 +85,8 @@ body {
     border-radius: 24px;
     box-shadow: var(--glass-shadow);
     padding: 2rem;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
 }
 
 /* Header - single row layout */
@@ -94,6 +98,8 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 0.65rem 1.25rem;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .unified-header::before {
@@ -103,7 +109,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.04) 0%, rgba(255, 255, 255, 0) 100%);
     z-index: 0;
     pointer-events: none;
 }
@@ -187,7 +193,7 @@ body {
 .progress-bar-container {
     width: 100%;
     height: 3px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.08);
     overflow: hidden;
 }
 
@@ -215,7 +221,7 @@ body {
     font-family: 'Outfit', sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #fff, var(--text-secondary));
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -1px;
@@ -223,7 +229,7 @@ body {
 }
 
 .status-badge {
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(5, 150, 105, 0.12);
     color: var(--success);
     padding: 0.15rem 0.5rem;
     border-radius: 999px;
@@ -259,32 +265,75 @@ body {
 }
 
 .type-badge {
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
+    padding: 0.15rem 0.55rem;
+    border-radius: 6px;
     font-size: 0.65rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .type-badge.routine {
-    background: rgba(139, 92, 246, 0.2);
-    color: var(--type-routine);
+    background: #ffedd5;
+    color: #c2410c;
+    border: 1px solid #fed7aa;
 }
 
 .type-badge.work {
-    background: rgba(59, 130, 246, 0.2);
-    color: var(--type-work);
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
 }
 
 .type-badge.meeting {
-    background: rgba(236, 72, 153, 0.2);
-    color: var(--type-meeting);
+    background: #fce7f3;
+    color: #9d174d;
+    border: 1px solid #fbcfe8;
 }
 
 .type-badge.break {
-    background: rgba(16, 185, 129, 0.2);
-    color: var(--type-break);
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.type-badge.free,
+.type-badge.free-time {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+/* Specific Task Badges */
+.type-badge.task-nis {
+    background: #e0f2fe !important;
+    color: #0284c7 !important;
+    border: 1px solid #7dd3fc !important;
+}
+
+.type-badge.task-vet {
+    background: #ede9fe !important;
+    color: #7c3aed !important;
+    border: 1px solid #c4b5fd !important;
+}
+
+.type-badge.task-gym {
+    background: #ffedd5 !important;
+    color: #ea580c !important;
+    border: 1px solid #fdba74 !important;
+}
+
+.type-badge.task-lunch {
+    background: #dcfce7 !important;
+    color: #16a34a !important;
+    border: 1px solid #86efac !important;
+}
+
+.type-badge.task-sleep {
+    background: #e0e7ff !important;
+    color: #4f46e5 !important;
+    border: 1px solid #a5b4fc !important;
 }
 
 .main-content {
@@ -436,21 +485,22 @@ body {
 
 .timeline-item.active-item .timeline-dot {
     background: var(--accent-primary);
-    box-shadow: 0 0 0 4px var(--bg-base), 0 0 10px var(--accent-primary);
+    box-shadow: 0 0 0 4px var(--bg-base), 0 0 10px rgba(124, 58, 237, 0.4);
 }
 
 .timeline-content {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-surface-solid);
     border: 1px solid var(--glass-border);
     padding: 1.25rem;
     border-radius: 16px;
     flex: 1;
     transition: var(--transition-fast);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 .timeline-item.active-item .timeline-content {
-    border-color: rgba(139, 92, 246, 0.5);
-    background: rgba(139, 92, 246, 0.05);
+    border-color: rgba(124, 58, 237, 0.4);
+    background: rgba(245, 243, 255, 0.9);
 }
 
 .timeline-content h4 {
@@ -480,7 +530,7 @@ body {
 }
 
 .floating-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-surface-solid);
     border: 1px solid var(--glass-border);
     padding: 1.5rem;
     border-radius: 16px;
@@ -489,17 +539,45 @@ body {
     gap: 1rem;
     transition: var(--transition-smooth);
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 .floating-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    background: #ffffff;
+    border-color: rgba(124, 58, 237, 0.35);
+    box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.08);
 }
 
 .floating-card.completed {
     opacity: 0.5;
     text-decoration: line-through;
+}
+
+/* Floating Card Task Accents */
+.floating-card.task-vet {
+    border-left: 5px solid #7c3aed;
+    background: linear-gradient(135deg, #ffffff 0%, #faf5ff 100%);
+}
+
+.floating-card.task-gym {
+    border-left: 5px solid #ea580c;
+    background: linear-gradient(135deg, #ffffff 0%, #fffaf5 100%);
+}
+
+.floating-card.task-nis {
+    border-left: 5px solid #0284c7;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+}
+
+.floating-card.task-email {
+    border-left: 5px solid #0284c7;
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+}
+
+.floating-card.task-chore {
+    border-left: 5px solid #10b981;
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
 }
 
 .floating-card-header {
@@ -517,8 +595,9 @@ body {
 .checkbox-custom {
     width: 24px;
     height: 24px;
-    border: 2px solid var(--text-secondary);
+    border: 2px solid var(--text-muted);
     border-radius: 6px;
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -546,7 +625,7 @@ body {
     font-size: 0.75rem;
     padding: 0.2rem 0.6rem;
     border-radius: 4px;
-    background: rgba(245, 158, 11, 0.2);
+    background: rgba(217, 119, 6, 0.12);
     color: var(--warning);
     text-transform: uppercase;
     font-weight: 600;
@@ -557,35 +636,34 @@ body {
     display: flex;
     flex-direction: column;
     overflow: auto;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.75);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
     flex: 1;
     min-height: 0;
     -webkit-overflow-scrolling: touch;
     will-change: transform;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
 }
 
 .calendar-wrapper,
 .calendar-body {
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
 }
 
 .calendar-wrapper::-webkit-scrollbar,
 .calendar-body::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari, Opera */
 }
 
 .calendar-header {
     display: grid;
     grid-template-columns: 60px repeat(7, 1fr);
     border-bottom: 1px solid var(--glass-border);
-    background: rgba(15, 23, 42, 0.85);
+    background: rgba(248, 250, 252, 0.94);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     flex-shrink: 0;
     position: sticky;
     top: 0;
@@ -606,8 +684,9 @@ body {
     position: sticky;
     left: 0;
     z-index: 60;
-    background: rgba(15, 23, 42, 0.98);
+    background: rgba(248, 250, 252, 0.98);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-right: 1px solid var(--glass-border);
 }
 
@@ -615,21 +694,18 @@ body {
     display: flex;
     position: relative;
     height: 1200px;
-    /* 24 hours * 50px */
 }
 
 .time-scale {
     width: 60px;
     height: 1200px;
-    /* Force exact match to calendar-body */
     flex-shrink: 0;
     position: sticky;
     left: 0;
     z-index: 40;
-    background: rgba(15, 23, 42, 0.85);
+    background: rgba(248, 250, 252, 0.94);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    /* Safari support */
     border-right: 1px solid var(--glass-border);
 }
 
@@ -642,7 +718,6 @@ body {
     color: var(--text-muted);
     font-size: 0.75rem;
     transform: translateY(-50%);
-    /* Center on the line */
 }
 
 .calendar-grid {
@@ -667,57 +742,182 @@ body {
     position: absolute;
     left: 4px;
     right: 4px;
-    padding: 0.5rem;
+    padding: 0.45rem 0.55rem;
     font-size: 0.8rem;
     overflow: hidden;
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.07);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .cal-task-block:hover {
     z-index: 10;
+    transform: translateY(-1px);
 }
 
 .cal-task-block h5 {
+    font-weight: 700;
+    font-size: 0.82rem;
+    margin-bottom: 0.15rem;
+    line-height: 1.25;
+    letter-spacing: -0.2px;
+}
+
+.cal-task-block .cal-task-time {
+    font-size: 0.68rem;
     font-weight: 600;
-    margin-bottom: 0.2rem;
-    line-height: 1.2;
+    opacity: 0.9;
+    letter-spacing: 0.2px;
+    display: block;
 }
 
-.cal-task-block span {
-    font-size: 0.7rem;
-    opacity: 0.8;
+/* ==========================================
+   VIBRANT TASK COLORS (Light Theme)
+   ========================================== */
+
+/* NIS Day Shift Work - Bright Ocean Azure */
+.cal-task-block.task-nis {
+    background: linear-gradient(145deg, #e0f2fe 0%, #bae6fd 60%, #93c5fd 100%);
+    border: 1px solid #60a5fa;
+    border-left: 5px solid #0284c7;
+    color: #0369a1;
+}
+.cal-task-block.task-nis h5 {
+    color: #02537f;
+}
+.cal-task-block.task-nis .cal-task-time {
+    color: #075985;
+}
+.cal-task-block.task-nis:hover {
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.32);
 }
 
-/* Calendar Task Colors */
-.cal-task-block.work {
-    background: rgba(59, 130, 246, 0.3);
-    border-left: 3px solid var(--type-work);
-    color: #eff6ff;
+/* VET Night Shift Work - Royal Velvet Violet */
+.cal-task-block.task-vet {
+    background: linear-gradient(145deg, #ede9fe 0%, #ddd6fe 60%, #c4b5fd 100%);
+    border: 1px solid #a78bfa;
+    border-left: 5px solid #7c3aed;
+    color: #5b21b6;
+}
+.cal-task-block.task-vet h5 {
+    color: #4c1d95;
+}
+.cal-task-block.task-vet .cal-task-time {
+    color: #6d28d9;
+}
+.cal-task-block.task-vet:hover {
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.32);
 }
 
-.cal-task-block.routine {
-    background: rgba(139, 92, 246, 0.3);
-    border-left: 3px solid var(--type-routine);
-    color: #f5f3ff;
+/* Gym / Workout / Ej - Vivid Energy Coral & Sunset Orange */
+.cal-task-block.task-gym {
+    background: linear-gradient(145deg, #ffedd5 0%, #fed7aa 60%, #fdba74 100%);
+    border: 1px solid #fb923c;
+    border-left: 5px solid #ea580c;
+    color: #c2410c;
+}
+.cal-task-block.task-gym h5 {
+    color: #9a3412;
+}
+.cal-task-block.task-gym .cal-task-time {
+    color: #c2410c;
+}
+.cal-task-block.task-gym:hover {
+    box-shadow: 0 4px 14px rgba(234, 88, 12, 0.32);
 }
 
-.cal-task-block.break {
-    background: rgba(16, 185, 129, 0.3);
-    border-left: 3px solid var(--type-break);
-    color: #ecfdf5;
+/* Lunch & Nutrition - Fresh Mint & Vibrant Emerald */
+.cal-task-block.task-lunch {
+    background: linear-gradient(145deg, #dcfce7 0%, #bbf7d0 60%, #86efac 100%);
+    border: 1px solid #4ade80;
+    border-left: 5px solid #16a34a;
+    color: #15803d;
+}
+.cal-task-block.task-lunch h5 {
+    color: #14532d;
+}
+.cal-task-block.task-lunch .cal-task-time {
+    color: #166534;
+}
+.cal-task-block.task-lunch:hover {
+    box-shadow: 0 4px 14px rgba(22, 163, 74, 0.32);
+}
+
+/* Sleep - Soothing Deep Dream Indigo */
+.cal-task-block.task-sleep {
+    background: linear-gradient(145deg, #e0e7ff 0%, #c7d2fe 60%, #a5b4fc 100%);
+    border: 1px solid #818cf8;
+    border-left: 5px solid #4f46e5;
+    color: #3730a3;
+}
+.cal-task-block.task-sleep h5 {
+    color: #312e81;
+}
+.cal-task-block.task-sleep .cal-task-time {
+    color: #4338ca;
+}
+.cal-task-block.task-sleep:hover {
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.32);
+}
+
+/* Free Time - Clean Slate */
+.cal-task-block.task-free,
+.cal-task-block.free,
+.cal-task-block.free-time {
+    background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid #cbd5e1;
+    border-left: 5px solid #94a3b8;
+    color: #475569;
+}
+.cal-task-block.task-free h5,
+.cal-task-block.free h5 {
+    color: #334155;
+}
+.cal-task-block.task-free .cal-task-time,
+.cal-task-block.free .cal-task-time {
+    color: #64748b;
+}
+
+/* Generic Fallbacks */
+.cal-task-block.work:not(.task-nis):not(.task-vet) {
+    background: linear-gradient(145deg, #e0f2fe 0%, #bae6fd 100%);
+    border: 1px solid #60a5fa;
+    border-left: 5px solid #0284c7;
+    color: #0369a1;
+}
+.cal-task-block.work:not(.task-nis):not(.task-vet) h5 {
+    color: #02537f;
+}
+
+.cal-task-block.routine:not(.task-gym) {
+    background: linear-gradient(145deg, #ede9fe 0%, #ddd6fe 100%);
+    border: 1px solid #a78bfa;
+    border-left: 5px solid #7c3aed;
+    color: #5b21b6;
+}
+.cal-task-block.routine:not(.task-gym) h5 {
+    color: #4c1d95;
+}
+
+.cal-task-block.break:not(.task-sleep):not(.task-lunch) {
+    background: linear-gradient(145deg, #dcfce7 0%, #bbf7d0 100%);
+    border: 1px solid #4ade80;
+    border-left: 5px solid #16a34a;
+    color: #15803d;
+}
+.cal-task-block.break:not(.task-sleep):not(.task-lunch) h5 {
+    color: #14532d;
 }
 
 .cal-task-block.meeting {
-    background: rgba(236, 72, 153, 0.3);
-    border-left: 3px solid var(--type-meeting);
-    color: #fdf2f8;
+    background: linear-gradient(145deg, #fce7f3 0%, #fbcfe8 100%);
+    border: 1px solid #f472b6;
+    border-left: 5px solid #db2777;
+    color: #9d174d;
 }
-
-.cal-task-block.free {
-    background: rgba(255, 255, 255, 0.05);
-    border-left: 3px solid var(--text-muted);
-    color: var(--text-secondary);
+.cal-task-block.meeting h5 {
+    color: #831843;
 }
 
 /* Calendar Animations */
@@ -727,10 +927,9 @@ body {
     right: 0;
     height: 2px;
     background-color: #ef4444;
-    /* Red 500 */
     z-index: 20;
     pointer-events: none;
-    box-shadow: 0 0 8px #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
 }
 
 .current-time-line::before {
@@ -742,35 +941,26 @@ body {
     height: 10px;
     border-radius: 50%;
     background-color: #ef4444;
-    /* Removed heavy shadows/animations for mobile scrolling performance */
-}
-
-@keyframes pulse-red {
-    /* Kept empty but available if needed later */
 }
 
 .cal-active-glow {
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    border: 2px solid var(--accent-primary) !important;
     z-index: 15;
     animation: gentle-shine 2s infinite alternate ease-in-out;
 }
 
 @keyframes gentle-shine {
     0% {
-        box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.15), 0 0 10px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
     }
     100% {
-        box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 18px rgba(124, 58, 237, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 1);
     }
-}
-
-@keyframes block-pulse {
-    /* Removed for performance */
 }
 
 .cal-past-dim {
-    opacity: 0.35;
-    filter: grayscale(80%);
+    opacity: 0.45;
+    filter: grayscale(70%);
 }
 
 /* Responsive */
@@ -789,6 +979,7 @@ body {
         border-left: none;
         border-right: none;
         padding: 1rem;
+        background: var(--bg-surface);
     }
 
     .tab-content {
@@ -798,6 +989,7 @@ body {
     .unified-header {
         padding: 0.4rem 0.5rem;
         gap: 0.4rem;
+        background: var(--bg-surface);
     }
 
     .header-left {
@@ -846,7 +1038,7 @@ body {
     }
 
     .floating-list {
-        grid-template-columns: 1fr; /* Force 1 column on small screens */
+        grid-template-columns: 1fr;
         gap: 0.75rem;
     }
 
@@ -859,7 +1051,6 @@ body {
     .floating-card-header h4 {
         font-size: 0.95rem;
     }
-
 
     .header-task-title {
         font-size: 0.8rem;
@@ -877,7 +1068,6 @@ body {
         font-size: 0.6rem;
         padding: 0.1rem 0.4rem;
     }
-
 
     .type-badge {
         font-size: 0.6rem;
@@ -950,7 +1140,6 @@ body {
         gap: 0.75rem;
     }
 
-    /* Seamless full-screen look — no panel boxing */
     .glass-panel {
         background: transparent;
         border: none;
@@ -965,9 +1154,10 @@ body {
         border-radius: 0;
         border-top: 3px solid var(--accent-primary);
         border-bottom: 1px solid var(--glass-border);
-        background: rgba(15, 23, 42, 0.6);
+        background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
     }
 
     .main-content {
